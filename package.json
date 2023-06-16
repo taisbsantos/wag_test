@@ -1,0 +1,22 @@
+{
+  "name": "wag_test",
+  "version": "1.0.0",
+  "description": "O objetivo é mensurar o desempenho de cinco parceiros descritos na aba 'Link Ids': João, Tiago, Carlos, Maria e Ana.\r Observa-se que cada parceiro possui seu próprio Link ID associado e também tem cupons associados descritos na aba 'Voucher Codes'.\r Essa análise procura responder às seguintes perguntas: \r - Quanto cada parceiro vendeu nos seus respectivos links associados ?\r - Quanto cada parceiro vendeu considerando o somatório dos seus cupons associados?",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/taisbsantos/wag_test.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/taisbsantos/wag_test/issues"
+  },
+  "homepage": "https://github.com/taisbsantos/wag_test#readme",
+  "dependencies": {
+    "xlsx": "^0.18.5"
+  }
+}
