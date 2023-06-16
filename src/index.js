@@ -14,9 +14,8 @@ analysis = () =>{
 
     partners.forEach((partner) => {
         partnersVouchers = readFile('Voucher Codes');
-
         filteredVouchers = partnersVouchers
-        .filter((partner) => partner['Parceiro'] === partner.Parceiro)
+        .filter((partnerFiltered) => partnerFiltered['Parceiro'] === partner.Parceiro)
         .map((voucher) => voucher['Voucher Code']);
         
         filteredVouchers.forEach((code) => {
