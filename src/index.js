@@ -7,26 +7,27 @@ analysis = () =>{
     data = readFile('Transactions');
 
     salesLink = sumSales(data, 'Link ID', partner.Link_ID)
-    console.log('O parceiro ' + partner.Parceiro + ' vendeu pelo Link ID $' + salesLink[0] + ' totais')
-    console.log('sendo $' + salesLink[1] + ' aprovados')
-    console.log('e $' + salesLink[2] + ' reprovados')
+    console.log('O parceiro ' + partner.Parceiro + ' vendeu pelo Link ID $' + salesLink[0].toFixed(2) + ' totais')
+    console.log('sendo $' + salesLink[1].toFixed(2) + ' aprovados')
+    console.log('e $' + salesLink[2].toFixed(2) + ' reprovados')
+    })
 
+    partners.forEach((partner) => {
+        partnersVouchers = readFile('Voucher Codes');
 
-    partnersVouchers = readFile('Voucher Codes');
-
-    filteredVouchers = partnersVouchers
-    .filter((linha) => linha['Parceiro'] === partner.Parceiro)
-    .map((linha) => linha['Voucher Code']);
-
-    filteredVouchers.forEach((code) => {
-        salesVoucher = sumSales(data, 'Voucher Code', code)
-        console.log('Com o código '+ code + ' foram vendidos $'+ salesVoucher[0])
-        console.log('sendo $' + salesVoucher[1] + ' aprovados')
-        console.log('e $' + salesVoucher[2] + ' reprovados')
-    });
-
-   })
+        filteredVouchers = partnersVouchers
+        .filter((partner) => partner['Parceiro'] === partner.Parceiro)
+        .map((voucher) => voucher['Voucher Code']);
+        
+        filteredVouchers.forEach((code) => {
+            salesVoucher = sumSales(data, 'Voucher Code', code)
+            console.log('O parceiro ' + partner.Parceiro + ' com o código '+ code + ' foram vendidos $'+ salesVoucher[0].toFixed(2))
+            console.log('sendo $' + salesVoucher[1].toFixed(2) + ' aprovados')
+            console.log('e $' + salesVoucher[2].toFixed(2) + ' reprovados')
+        });
+    })  
 }
+
 
 readFile = (sheetName) => {
     const arquivo = '../files/sales.xlsx';
