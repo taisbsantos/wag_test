@@ -43,9 +43,6 @@ readFile = (sheetName) => {
 
 }
 
-sumSalesLink = (data, columnSheet, value ) => {
-
-}
 
 sumSales = (data, columnSheet, value ) => {
 
