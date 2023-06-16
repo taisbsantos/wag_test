@@ -4,14 +4,28 @@ analysis = () =>{
    partners = readFile('Link Ids');
 
    partners.forEach((partner) => {
-    data = readFile('Transactions',partner.Link_ID);
+    data = readFile('Transactions');
 
     salesLink = sumSales(data, 'Link ID', partner.Link_ID)
     console.log('O parceiro ' + partner.Parceiro + ' vendeu pelo Link ID $' + salesLink[0] + ' totais')
-    console.log('sendo $' + salesLink[0] + ' aprovados')
-    console.log('e $' + salesLink[0] + ' reprovados')
+    console.log('sendo $' + salesLink[1] + ' aprovados')
+    console.log('e $' + salesLink[2] + ' reprovados')
 
-  });
+
+    partnersVouchers = readFile('Voucher Codes');
+
+    filteredVouchers = partnersVouchers
+    .filter((linha) => linha['Parceiro'] === partner.Parceiro)
+    .map((linha) => linha['Voucher Code']);
+
+    filteredVouchers.forEach((code) => {
+        salesVoucher = sumSales(data, 'Voucher Code', code)
+        console.log('Com o código '+ code + ' foram vendidos $'+ salesVoucher[0])
+        console.log('sendo $' + salesVoucher[1] + ' aprovados')
+        console.log('e $' + salesVoucher[2] + ' reprovados')
+    });
+
+   })
 }
 
 readFile = (sheetName) => {
@@ -26,6 +40,10 @@ readFile = (sheetName) => {
     data = xlsx.utils.sheet_to_json(worksheet);
 
     return data;
+
+}
+
+sumSalesLink = (data, columnSheet, value ) => {
 
 }
 
@@ -45,7 +63,7 @@ sumSales = (data, columnSheet, value ) => {
         sumApproved = sumApproved +  result['Revenue'];
     })
 
-    resultsRejected = results.filter((transaction) => transaction['Status'] == 'Approved')
+    resultsRejected = results.filter((transaction) => transaction['Status'] == 'Rejected')
     resultsRejected.map((result) => {
         sumRejected = sumRejected +  result['Revenue'];
     })
